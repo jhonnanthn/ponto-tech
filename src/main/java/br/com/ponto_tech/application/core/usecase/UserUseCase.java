@@ -31,6 +31,11 @@ public class UserUseCase implements UserIn {
     }
 
     @Override
+    public UserDTO findByEmail(String email) {
+        return UserMapper.INSTANCE.toDto(userRepository.findByEmail(email));
+    }
+
+    @Override
     public List<UserDTO> findAll() {
         return UserMapper.INSTANCE.toDtoList(userRepository.findAll());
     }

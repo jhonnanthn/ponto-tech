@@ -66,6 +66,20 @@
 			<version>1.5.5.Final</version>
 		</dependency>
 
+		<!-- Spring Security Crypto for password hashing (BCrypt) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>6.4.5</version>
+		</dependency>
+
+		<!-- Java JWT (Auth0) for token generation -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+
 		<!-- Springdoc OpenAPI (Swagger UI) for Spring Boot 3 -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

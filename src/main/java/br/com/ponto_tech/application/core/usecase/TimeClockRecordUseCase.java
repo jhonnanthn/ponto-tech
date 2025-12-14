@@ -30,14 +30,24 @@ public class TimeClockRecordUseCase implements TimeClockRecordIn {
     }
 
     @Override
-    public TimeClockRecordDTO findById(String id) {
-        TimeClockRecord entity = repository.findById(id);
+    public TimeClockRecordDTO findByUserIdAndId(String userId, String id) {
+        TimeClockRecord entity = repository.findByUserIdAndId(userId, id);
         return entity == null ? null : mapper.toDto(entity);
     }
 
     @Override
-    public List<TimeClockRecordDTO> findAll() {
-        return repository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
+    public List<TimeClockRecordDTO> findAllByUserId(String userId) {
+        return repository.findAllByUserId(userId).stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TimeClockRecordDTO> findByUserIdAndDate(String userId, String date) {
+        return repository.findByUserIdAndDate(userId, date).stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TimeClockRecordDTO> findByUserIdAndMonth(String userId, String month) {
+        return repository.findByUserIdAndMonth(userId, month).stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -47,7 +57,7 @@ public class TimeClockRecordUseCase implements TimeClockRecordIn {
     }
 
     @Override
-    public void deleteById(String id) {
-        repository.deleteById(id);
+    public void deleteByUserIdAndId(String userId, String id) {
+        repository.deleteByUserIdAndId(userId, id);
     }
 }

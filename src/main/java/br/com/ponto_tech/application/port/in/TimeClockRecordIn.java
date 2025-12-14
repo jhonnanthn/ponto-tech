@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface TimeClockRecordIn {
     String save(CreateTimeClockRecordDTO dto);
-    TimeClockRecordDTO findById(String id);
-    List<TimeClockRecordDTO> findAll();
+    TimeClockRecordDTO findByUserIdAndId(String userId, String id);
+    List<TimeClockRecordDTO> findAllByUserId(String userId);
+    List<TimeClockRecordDTO> findByUserIdAndDate(String userId, String date);
+    List<TimeClockRecordDTO> findByUserIdAndMonth(String userId, String month);
     void update(TimeClockRecordDTO dto);
-    void deleteById(String id);
+    void deleteByUserIdAndId(String userId, String id);
 }

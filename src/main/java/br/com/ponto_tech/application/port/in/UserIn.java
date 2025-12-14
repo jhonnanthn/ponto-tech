@@ -8,6 +8,7 @@ import java.util.List;
 public interface UserIn {
     String save(CreateUserDTO user);
     UserDTO findById(String id);
+    UserDTO findByEmail(String email);
     List<UserDTO> findAll();
     void update(UserDTO user);
     void deleteById(String id);
