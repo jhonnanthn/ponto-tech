@@ -58,6 +58,28 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- Springdoc OpenAPI (Swagger UI) for Spring Boot 3 -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<!-- Swagger annotations (explicit) to help IDE/compiler resolve io.swagger.v3 classes -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations-jakarta</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+
+		<!-- Swagger core (Jakarta) to provide OpenAPI model classes like OpenAPI and Info -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-core-jakarta</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -75,6 +97,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 
 
 

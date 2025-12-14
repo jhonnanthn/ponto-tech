@@ -12,39 +12,39 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecon
 @DynamoDbBean
 public class Users {
 
-    @Getter(onMethod_ = @__({@DynamoDbPartitionKey, @DynamoDbAttribute("UserID")}))
+    @Getter(onMethod_ = @__({@DynamoDbPartitionKey, @DynamoDbAttribute("userId")}))
     @Setter
     private String userId;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("FullName")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("fullName")}))
     @Setter
     private String fullName;
 
-    @Getter(onMethod_ = @__({@DynamoDbSecondaryPartitionKey(indexNames = "EmailIndex"), @DynamoDbAttribute("Email")}))
+    @Getter(onMethod_ = @__({@DynamoDbSecondaryPartitionKey(indexNames = "EmailIndex"), @DynamoDbAttribute("email")}))
     @Setter
     private String email;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("CPF")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("cpf")}))
     @Setter
     private String cpf;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("PhotoURL")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("photoUrl")}))
     @Setter
     private String photoUrl;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("FaceId")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("faceId")}))
     @Setter
     private String faceId;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("Role")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("role")}))
     @Setter
     private String role;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("CreatedAt")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("createdAt")}))
     @Setter
     private String createdAt;
 
-    @Getter(onMethod_ = @__({@DynamoDbAttribute("UpdatedAt")}))
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("updatedAt")}))
     @Setter
     private String updatedAt;
 }

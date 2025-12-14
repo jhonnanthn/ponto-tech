@@ -1,56 +1,34 @@
 package br.com.ponto_tech.application.core.domain.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondaryPartitionKey;
 
+@Data
 @DynamoDbBean
 public class FaceRecognitionLog {
+
+    @Getter(onMethod_ = @__({@DynamoDbPartitionKey, @DynamoDbAttribute("logId")}))
+    @Setter
     private String logId;
+
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("userId")}))
+    @Setter
     private String userId;
+
+    @Getter(onMethod_ = @__({@DynamoDbSecondaryPartitionKey(indexNames = "StatusIndex"), @DynamoDbAttribute("status")}))
+    @Setter
     private String status;
+
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("errorDetail")}))
+    @Setter
     private String errorDetail;
+
+    @Getter(onMethod_ = @__({@DynamoDbAttribute("createdAt")}))
+    @Setter
     private String createdAt;
-
-    @DynamoDbPartitionKey
-    public String getLogId() {
-        return logId;
-    }
-
-    public void setLogId(String logId) {
-        this.logId = logId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    @DynamoDbSecondaryPartitionKey(indexNames = "StatusIndex")
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getErrorDetail() {
-        return errorDetail;
-    }
-
-    public void setErrorDetail(String errorDetail) {
-        this.errorDetail = errorDetail;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
 }
