@@ -1,6 +1,7 @@
 package br.com.ponto_tech.adapter.in.controller;
 
 import br.com.ponto_tech.application.core.domain.dto.UserDTO;
+import br.com.ponto_tech.application.core.domain.dto.CreateUserDTO;
 import br.com.ponto_tech.application.port.in.UserIn;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -56,9 +57,9 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "Usuário criado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
-    public ResponseEntity<Void> createUser(@RequestBody UserDTO user) {
-        userIn.save(user);
-        return ResponseEntity.created(URI.create("/users/" + user.getUserId())).build();
+    public ResponseEntity<Void> createUser(@RequestBody CreateUserDTO dto) {
+        String userId = userIn.save(dto);
+        return ResponseEntity.created(URI.create("/v1/users/" + userId)).build();
     }
 
     @PutMapping("/{id}")

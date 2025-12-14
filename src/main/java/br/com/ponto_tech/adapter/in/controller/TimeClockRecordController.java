@@ -1,6 +1,7 @@
 package br.com.ponto_tech.adapter.in.controller;
 
 import br.com.ponto_tech.application.core.domain.dto.TimeClockRecordDTO;
+import br.com.ponto_tech.application.core.domain.dto.CreateTimeClockRecordDTO;
 import br.com.ponto_tech.application.port.in.TimeClockRecordIn;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -51,12 +52,9 @@ public class TimeClockRecordController {
 
     @PostMapping
     @Operation(summary = "Criar um novo registro de ponto")
-    public ResponseEntity<Void> create(@RequestBody TimeClockRecordDTO dto) {
-        if (dto.getRecordId() == null || dto.getRecordId().isEmpty()) {
-            dto.setRecordId(UUID.randomUUID().toString());
-        }
-        timeClockRecordIn.save(dto);
-        return ResponseEntity.created(URI.create("/v1/time-clock-records/" + dto.getRecordId())).build();
+    public ResponseEntity<Void> create(@RequestBody CreateTimeClockRecordDTO dto) {
+        String recordId = timeClockRecordIn.save(dto);
+        return ResponseEntity.created(URI.create("/v1/time-clock-records/" + recordId)).build();
     }
 
     @PutMapping("/{id}")
@@ -78,4 +76,3 @@ public class TimeClockRecordController {
         return ResponseEntity.noContent().build();
     }
 }
-

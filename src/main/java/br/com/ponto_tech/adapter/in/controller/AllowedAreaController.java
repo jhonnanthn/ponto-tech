@@ -1,6 +1,7 @@
 package br.com.ponto_tech.adapter.in.controller;
 
 import br.com.ponto_tech.application.core.domain.dto.AllowedAreaDTO;
+import br.com.ponto_tech.application.core.domain.dto.CreateAllowedAreaDTO;
 import br.com.ponto_tech.application.port.in.AllowedAreaIn;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -51,12 +52,9 @@ public class AllowedAreaController {
 
     @PostMapping
     @Operation(summary = "Criar uma nova area permitida")
-    public ResponseEntity<Void> create(@RequestBody AllowedAreaDTO dto) {
-        if (dto.getAreaId() == null || dto.getAreaId().isEmpty()) {
-            dto.setAreaId(UUID.randomUUID().toString());
-        }
-        allowedAreaIn.save(dto);
-        return ResponseEntity.created(URI.create("/v1/allowed-areas/" + dto.getAreaId())).build();
+    public ResponseEntity<Void> create(@RequestBody CreateAllowedAreaDTO dto) {
+        String areaId = allowedAreaIn.save(dto);
+        return ResponseEntity.created(URI.create("/v1/allowed-areas/" + areaId)).build();
     }
 
     @PutMapping("/{id}")
@@ -78,4 +76,3 @@ public class AllowedAreaController {
         return ResponseEntity.noContent().build();
     }
 }
-

@@ -1,14 +1,14 @@
 package br.com.ponto_tech.application.port.in;
 
 import br.com.ponto_tech.application.core.domain.dto.AllowedAreaDTO;
+import br.com.ponto_tech.application.core.domain.dto.CreateAllowedAreaDTO;
 
 import java.util.List;
 
 public interface AllowedAreaIn {
-    void save(AllowedAreaDTO dto);
+    String save(CreateAllowedAreaDTO dto);
     AllowedAreaDTO findById(String id);
     List<AllowedAreaDTO> findAll();
     void update(AllowedAreaDTO dto);
     void deleteById(String id);
 }
-

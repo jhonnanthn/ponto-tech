@@ -2,6 +2,7 @@ package br.com.ponto_tech.application.core.usecase;
 
 import br.com.ponto_tech.adapter.out.repository.UserRepository;
 import br.com.ponto_tech.application.core.domain.dto.UserDTO;
+import br.com.ponto_tech.application.core.domain.dto.CreateUserDTO;
 import br.com.ponto_tech.application.core.domain.entity.Users;
 import br.com.ponto_tech.application.core.mapper.UserMapper;
 import br.com.ponto_tech.application.port.in.UserIn;
@@ -18,8 +19,10 @@ public class UserUseCase implements UserIn {
     }
 
     @Override
-    public void save(UserDTO user) {
-        userRepository.save(UserMapper.INSTANCE.toUser(user));
+    public String save(CreateUserDTO user) {
+        Users entity = UserMapper.INSTANCE.toUser(user);
+        userRepository.save(entity);
+        return entity.getUserId();
     }
 
     @Override
