@@ -1,13 +1,14 @@
 package br.com.ponto_tech.application.port.in;
 
+import br.com.ponto_tech.application.core.domain.dto.UserDTO;
 import br.com.ponto_tech.application.core.domain.entity.Users;
 
 import java.util.List;
 
 public interface UserIn {
-    void save(Users users);
-    Users findById(String id);
-    List<Users> findAll();
-    void update(Users users);
+    void save(UserDTO user);
+    UserDTO findById(String id);
+    List<UserDTO> findAll();
+    void update(UserDTO user);
     void deleteById(String id);
 }

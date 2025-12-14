@@ -1,20 +1,19 @@
 package br.com.ponto_tech.adapter.in.controller;
 
-import br.com.ponto_tech.application.core.domain.entity.Users;
+import br.com.ponto_tech.application.core.domain.dto.UserDTO;
 import br.com.ponto_tech.application.port.in.UserIn;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -29,9 +28,9 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Lista de usuários",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Users.class)))
+                            schema = @Schema(implementation = UserDTO.class)))
     })
-    public List<Users> findAllUsers() {
+    public List<UserDTO> findAllUsers() {
         return userIn.findAll();
     }
 
@@ -40,11 +39,11 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuário encontrado",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Users.class))),
+                            schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public ResponseEntity<Users> findUser(@PathVariable("id") String id) {
-        Users users = userIn.findById(id);
+    public ResponseEntity<UserDTO> findUser(@PathVariable("id") String id) {
+        UserDTO users = userIn.findById(id);
         if (users == null) {
             return ResponseEntity.notFound().build();
         }
@@ -57,9 +56,9 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "Usuário criado"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida")
     })
-    public ResponseEntity<Void> createUser(@RequestBody Users users) {
-        userIn.save(users);
-        return ResponseEntity.created(URI.create("/users/" + users.getUserId())).build();
+    public ResponseEntity<Void> createUser(@RequestBody UserDTO user) {
+        userIn.save(user);
+        return ResponseEntity.created(URI.create("/users/" + user.getUserId())).build();
     }
 
     @PutMapping("/{id}")
@@ -68,11 +67,11 @@ public class UserController {
             @ApiResponse(responseCode = "204", description = "Atualização realizada"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public ResponseEntity<Void> updateUser(@PathVariable("id") String id, @RequestBody Users users) {
-        if (users.getUserId() == null || !users.getUserId().equals(id)) {
-            users.setUserId(id);
+    public ResponseEntity<Void> updateUser(@PathVariable("id") String id, @RequestBody UserDTO user) {
+        if (user.getUserId() == null || !user.getUserId().equals(id)) {
+            user.setUserId(id);
         }
-        userIn.update(users);
+        userIn.update(user);
         return ResponseEntity.noContent().build();
     }
 
@@ -86,5 +85,4 @@ public class UserController {
         userIn.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
 }

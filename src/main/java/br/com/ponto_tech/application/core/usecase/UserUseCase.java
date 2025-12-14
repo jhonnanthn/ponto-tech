@@ -1,7 +1,9 @@
 package br.com.ponto_tech.application.core.usecase;
 
 import br.com.ponto_tech.adapter.out.repository.UserRepository;
+import br.com.ponto_tech.application.core.domain.dto.UserDTO;
 import br.com.ponto_tech.application.core.domain.entity.Users;
+import br.com.ponto_tech.application.core.mapper.UserMapper;
 import br.com.ponto_tech.application.port.in.UserIn;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,23 +18,23 @@ public class UserUseCase implements UserIn {
     }
 
     @Override
-    public void save(Users users) {
-        userRepository.save(users);
+    public void save(UserDTO user) {
+        userRepository.save(UserMapper.INSTANCE.toUser(user));
     }
 
     @Override
-    public Users findById(String id) {
-        return userRepository.findById(id);
+    public UserDTO findById(String id) {
+        return UserMapper.INSTANCE.toDto(userRepository.findById(id));
     }
 
     @Override
-    public List<Users> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return UserMapper.INSTANCE.toDtoList(userRepository.findAll());
     }
 
     @Override
-    public void update(Users users) {
-        userRepository.save(users);
+    public void update(UserDTO user) {
+        userRepository.save(UserMapper.INSTANCE.toUser(user));
     }
 
     @Override
